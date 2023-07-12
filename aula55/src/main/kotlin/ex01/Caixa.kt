@@ -82,6 +82,39 @@ class Caixa {
                 "O valor total do estoque é $total")
     }
 
+    fun reporEstoque() {
+        if(listaProdutos.isEmpty()){
+            println("\nNenhum produto foi cadastrado!")
+        } else {
+            println("\n----------Produtos Cadastrados----------")
+            for(i in 0 until listaProdutos.size){
+                println("${i+1} - ${listaProdutos[i]}")
+            }
+
+            var escolha: Int
+            do {
+                print("\nDigite o número do produto que deseja repor: ")
+                escolha = readln().toIntOrNull() ?: 0
+                if (escolha <= 0 || escolha > listaProdutos.size) {
+                    println("\nOpção inválida!")
+                } else {
+                    val produto = listaProdutos[escolha - 1]
+                    var quantidade: Int
+                    do {
+                        print("Digite a quantidade que deseja repor do produto: ")
+                        quantidade = readln().toIntOrNull() ?: 0
+                        if (quantidade <= 0) {
+                            println("\nQuantidade inválida!\n")
+                        } else {
+                            produto.quantidade += quantidade
+                            println("\nO estoque do produto '${produto.nome}' foi reposto em $quantidade unidades")
+                        }
+                    } while (quantidade <= 0)
+                }
+            } while (escolha <= 0 || escolha > listaProdutos.size)
+        }
+    }
+
     fun adicionarProdutoCarrinho(carrinho: ArrayList<Produto>) {
         exibirProdutosCadastrados()
         var escolha: Int

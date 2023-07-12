@@ -30,8 +30,9 @@ fun funcionario(){
         println( "\n--------------- MENU DO FUNCIONÁRIO ---------------\n"+
                 "\t1 - Cadastrar Produtos\n" +
                 "\t2 - Exibir Produtos Cadastrados\n" +
-                "\t3 - Exibir Valor Total dos Produtos\n" +
-                "\t4 - Voltar ao Menu Principal\n")
+                "\t3 - Repor Estoque\n" +
+                "\t4 - Exibir Valor Total dos Produtos\n" +
+                "\t5 - Voltar ao Menu Principal\n")
 
         print("Digite o número referente a opção desejada: ")
         opcao = readln().toIntOrNull()?:0
@@ -39,8 +40,9 @@ fun funcionario(){
         when(opcao){
             1 -> caixa.cadastrarProdutos()
             2 -> caixa.exibirProdutosCadastrados()
-            3 -> caixa.exibirValorTotalProdutosCadastrados()
-            4 -> break
+            3 -> caixa.reporEstoque()
+            4 -> caixa.exibirValorTotalProdutosCadastrados()
+            5 -> break
             else -> println("Opção Inválida!")
         }
     }
