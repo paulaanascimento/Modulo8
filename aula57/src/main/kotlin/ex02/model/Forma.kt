@@ -1,4 +1,4 @@
-package ex02
+package ex02.model
 
 abstract class Forma {
     abstract fun calcularArea():Float

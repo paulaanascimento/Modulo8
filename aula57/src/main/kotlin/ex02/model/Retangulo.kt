@@ -1,4 +1,4 @@
-package ex02
+package ex02.model
 
 open class Retangulo (private var lado:Float, private var altura:Float) : Forma(){
     override fun calcularArea(): Float {

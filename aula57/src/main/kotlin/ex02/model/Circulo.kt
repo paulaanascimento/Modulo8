@@ -1,4 +1,4 @@
-package ex02
+package ex02.model
 
 class Circulo (private var raio:Float) : Forma(){
     override fun calcularArea(): Float {

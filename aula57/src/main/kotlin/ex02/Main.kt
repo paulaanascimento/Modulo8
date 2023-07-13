@@ -1,5 +1,10 @@
 package ex02
 
+import ex02.model.Circulo
+import ex02.model.Forma
+import ex02.model.Quadrado
+import ex02.model.Retangulo
+
 fun main() {
     val listaFormas = ArrayList<Forma>()
 
@@ -16,7 +21,7 @@ fun main() {
     }
 
     println("-----Retangulo-----")
-    listaFormas.filterIsInstance<Retangulo>().forEach { retangulo : Retangulo->
+    listaFormas.filterIsInstance<Retangulo>().forEach { retangulo : Retangulo ->
         println("Area: ${retangulo.calcularArea()}")
         println("Perimetro: ${retangulo.calcularPerimetro()}\n")
     }
