@@ -14,21 +14,21 @@ fun main() {
     listaFormas.add(Circulo(150f))
     listaFormas.add(Retangulo(9f, 3f))
 
-    println("-----Circulo-----")
-    listaFormas.filterIsInstance<Circulo>().forEach { circulo : Circulo ->
-        println("Area: ${circulo.calcularArea()}")
-        println("Perimetro: ${circulo.calcularPerimetro()}\n")
-    }
+    listaFormas.forEach { forma: Forma ->
+        when (forma) {
+            is Circulo -> {
+                println("----- CIRCULO -----")
+            }
 
-    println("-----Retangulo-----")
-    listaFormas.filterIsInstance<Retangulo>().forEach { retangulo : Retangulo ->
-        println("Area: ${retangulo.calcularArea()}")
-        println("Perimetro: ${retangulo.calcularPerimetro()}\n")
-    }
+            is Quadrado -> {
+                println("----- QUADRADO -----")
+            }
 
-    println("-----Quadrado-----")
-    listaFormas.filterIsInstance<Quadrado>().forEach { quadrado : Quadrado ->
-           println("Area: ${quadrado.calcularArea()}")
-        println("Perimetro: ${quadrado.calcularPerimetro()}\n")
+            is Retangulo -> {
+                println("----- RETANGULO -----")
+            }
+        }
+        println("Area: ${forma.calcularArea()}")
+        println("Perimetro: ${forma.calcularPerimetro()}\n")
     }
 }
