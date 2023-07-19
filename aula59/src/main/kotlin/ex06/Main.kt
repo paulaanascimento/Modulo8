@@ -14,7 +14,7 @@ fun main() {
             1 -> println("\nAS PEÇAS FORAM SALVAS COM O ID ${GuardaVolumes.guardarPecas(GuardaVolumes.cadastrarPecas())}")
             2 -> GuardaVolumes.mostrarPecas()
             3 -> {
-                println("\n---------- MOSTRANDO TODAS PEÇAS ----------")
+                println("\n---------- MOSTRANDO PEÇAS POR ID ----------")
                 var id:Int
                 do{
                     print("Digite o ID: ")

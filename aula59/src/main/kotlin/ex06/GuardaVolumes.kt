@@ -15,6 +15,7 @@ class GuardaVolumes {
             if(dicionario.isEmpty()){
                 println("\nO dicionário está vazio!")
             } else {
+                println("\n---------- MOSTRANDO TODAS AS PEÇAS ----------")
                 for((id, listaPecas) in dicionario){
                     println("\n------ ID $id -------")
                     for(peca in listaPecas){
