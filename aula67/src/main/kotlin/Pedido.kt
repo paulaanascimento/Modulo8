@@ -1,6 +1,10 @@
 class Pedido {
     private val status = listOf("Pendente", "Em separação", "Enviado")
     private var statusId = -1
+
+    private var estoqueLaranja = 3
+    private var estoqueMaca = 3
+
     val listaFrutas = mutableListOf<Fruta>()
 
     fun calcularTotal(): Double {
@@ -15,9 +19,23 @@ class Pedido {
     fun informarPedido(lista: List<String>){
         for (nome in lista) {
             when (nome.trim().lowercase()) {
-                "maçã" -> listaFrutas.add(Maca())
-                "laranja" -> listaFrutas.add(Laranja())
-                else -> println("Produto inválido: $nome")
+                "maçã" -> {
+                    if (estoqueMaca == 0){
+                        throw (UnsupportedOperationException("\nFalha no pedido!"))
+                    } else {
+                        estoqueMaca--
+                        listaFrutas.add(Maca())
+                    }
+                }
+                "laranja" -> {
+                    if (estoqueLaranja == 0){
+                        throw (UnsupportedOperationException("\nFalha no pedido!"))
+                    } else {
+                        estoqueLaranja--
+                        listaFrutas.add(Laranja())
+                    }
+                }
+                else -> throw (UnsupportedOperationException("\nFalha no pedido!"))
             }
         }
     }
@@ -44,9 +62,4 @@ class Pedido {
             "Status do Pedido: ${status[statusId]} - Tempo Estimado de Entrega: 3 horas"
         }
     }
-}
-
-fun main() {
-    val pedido = Pedido()
-    pedido.informarPedido(listOf("Maçã", "Maçã", "Laranja", "Maçã"))
 }

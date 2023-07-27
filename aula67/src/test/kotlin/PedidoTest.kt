@@ -45,12 +45,23 @@ class PedidoTest {
     }
 
     @Test
-    fun deveAtualizarStatusTresVezes() {
+    fun deveAtualizarStatusQuatroVezes() {
         val pedido = Pedido()
         assertEquals("Status do Pedido: Pendente - Tempo Estimado de Entrega: 1 dia", pedido.correio())
         assertEquals("Status do Pedido: Em separação - Tempo Estimado de Entrega: 1 dia", pedido.correio())
         assertEquals("Status do Pedido: Enviado - Tempo Estimado de Entrega: 1 dia", pedido.correio())
         assertEquals("Status do Pedido: Enviado - Tempo Estimado de Entrega: 3 horas", pedido.correio())
         assertEquals("Status do Pedido: Enviado - Tempo Estimado de Entrega: 3 horas", pedido.correio())
+    }
+
+    @Test
+    fun deveLancarExcessaoDeFalhaNoPedido() {
+        val pedido = Pedido()
+        assertThrows(UnsupportedOperationException::class.java){
+            pedido.informarPedido(listOf("Laranja", "Laranja", "Laranja", "Laranja"))
+        }
+        assertThrows(UnsupportedOperationException::class.java){
+            pedido.informarPedido(listOf("Maçã", "Maçã", "Maçã", "Maçã"))
+        }
     }
 }
