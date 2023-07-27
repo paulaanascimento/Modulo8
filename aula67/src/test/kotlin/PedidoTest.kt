@@ -63,5 +63,8 @@ class PedidoTest {
         assertThrows(UnsupportedOperationException::class.java){
             pedido.informarPedido(listOf("Maçã", "Maçã", "Maçã", "Maçã"))
         }
+        assertThrows(UnsupportedOperationException::class.java){
+            pedido.informarPedido(listOf("Maçã", "Tomate"))
+        }
     }
 }

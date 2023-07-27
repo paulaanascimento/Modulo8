@@ -13,7 +13,7 @@ class Pedido {
             total += fruta.preco
         }
 
-        return aplicarPromocao(listaFrutas, total)
+        return aplicarPromocao(total)
     }
 
     fun informarPedido(lista: List<String>){
@@ -40,7 +40,7 @@ class Pedido {
         }
     }
 
-    private fun aplicarPromocao(listaFrutas:List<Fruta>, total:Double):Double{
+    private fun aplicarPromocao(total:Double):Double{
         var novoValor = total
 
         if(listaFrutas.count{it is Laranja} >= 3){
