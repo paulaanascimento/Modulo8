@@ -5,38 +5,52 @@ import org.junit.jupiter.api.Assertions.*
 class PedidoTest {
 
     @Test
-    fun calcularTotal() {
+    fun deveAdicionarProdutoALista() {
         val pedido = Pedido()
-        val resultado = pedido.calcularTotal(listOf(Maca(), Maca(), Laranja(), Maca()))
-        assertEquals(2.05, resultado)
+        assertEquals(0, pedido.listaFrutas.size)
+        pedido.informarPedido(listOf("Maçã", "Maçã", "Laranja", "Maçã"))
+        assertEquals(4, pedido.listaFrutas.size)
     }
 
     @Test
-    fun informarPedido() {
+    fun deveRetornarOTotalDoPedidoDaLista() {
         val pedido = Pedido()
-        val resultado = pedido.informarPedido(listOf("Maçã", "Maçã", "Laranja", "Maçã"))
-        assertTrue(resultado is List<Fruta>)
-        assertEquals(4, resultado.size)
+        pedido.informarPedido(listOf("Maçã", "Laranja", "Laranja"))
+        val resultado = pedido.calcularTotal()
+        assertEquals(1.10, resultado)
     }
 
     @Test
-    fun aplicarPromocaoLaranja() {
+    fun deveAplicarPromocaoLaranja() {
         val pedido = Pedido()
-        val resultado = pedido.calcularTotal(listOf(Laranja(), Laranja(), Laranja()))
+        pedido.informarPedido(listOf("Laranja", "Laranja", "Laranja"))
+        val resultado = pedido.calcularTotal()
         assertEquals(0.50, resultado)
     }
 
     @Test
-    fun aplicarPromocaoMaca() {
+    fun deveAplicarPromocaoMaca() {
         val pedido = Pedido()
-        val resultado = pedido.calcularTotal(listOf(Maca(), Maca()))
+        pedido.informarPedido(listOf("Maçã", "Maçã"))
+        val resultado = pedido.calcularTotal()
         assertEquals(0.60, resultado)
     }
 
     @Test
-    fun aplicarPromocaoLaranjaMaca() {
+    fun deveAplicarPromocaoLaranjaMaca() {
         val pedido = Pedido()
-        val resultado = pedido.calcularTotal(listOf(Laranja(), Laranja(), Laranja(), Maca(), Maca()))
+        pedido.informarPedido(listOf("Laranja", "Laranja", "Laranja", "Maçã", "Maçã"))
+        val resultado = pedido.calcularTotal()
         assertEquals(1.10, resultado)
+    }
+
+    @Test
+    fun deveAtualizarStatusTresVezes() {
+        val pedido = Pedido()
+        assertEquals("Status do Pedido: Pendente - Tempo Estimado de Entrega: 1 dia", pedido.correio())
+        assertEquals("Status do Pedido: Em separação - Tempo Estimado de Entrega: 1 dia", pedido.correio())
+        assertEquals("Status do Pedido: Enviado - Tempo Estimado de Entrega: 1 dia", pedido.correio())
+        assertEquals("Status do Pedido: Enviado - Tempo Estimado de Entrega: 3 horas", pedido.correio())
+        assertEquals("Status do Pedido: Enviado - Tempo Estimado de Entrega: 3 horas", pedido.correio())
     }
 }

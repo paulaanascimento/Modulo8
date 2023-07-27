@@ -1,5 +1,9 @@
 class Pedido {
-    fun calcularTotal(listaFrutas: List<Fruta>): Double {
+    private val status = listOf("Pendente", "Em separação", "Enviado")
+    private var statusId = -1
+    val listaFrutas = mutableListOf<Fruta>()
+
+    fun calcularTotal(): Double {
         var total = 0.0
         for (fruta in listaFrutas) {
             total += fruta.preco
@@ -8,17 +12,14 @@ class Pedido {
         return aplicarPromocao(listaFrutas, total)
     }
 
-    fun informarPedido(listaFrutas: List<String>): List<Fruta> {
-        val produtos = mutableListOf<Fruta>()
-        for (nome in listaFrutas) {
+    fun informarPedido(lista: List<String>){
+        for (nome in lista) {
             when (nome.trim().lowercase()) {
-                "maçã" -> produtos.add(Maca())
-                "laranja" -> produtos.add(Laranja())
+                "maçã" -> listaFrutas.add(Maca())
+                "laranja" -> listaFrutas.add(Laranja())
                 else -> println("Produto inválido: $nome")
             }
         }
-
-        return produtos
     }
 
     private fun aplicarPromocao(listaFrutas:List<Fruta>, total:Double):Double{
@@ -34,9 +35,18 @@ class Pedido {
 
         return novoValor
     }
+
+    fun correio():String{
+        return if(statusId < 2){
+            statusId++
+            "Status do Pedido: ${status[statusId]} - Tempo Estimado de Entrega: 1 dia"
+        } else{
+            "Status do Pedido: ${status[statusId]} - Tempo Estimado de Entrega: 3 horas"
+        }
+    }
 }
 
 fun main() {
     val pedido = Pedido()
-    println(pedido.calcularTotal(pedido.informarPedido(listOf("Maçã", "Maçã", "Laranja", "Maçã"))))
+    pedido.informarPedido(listOf("Maçã", "Maçã", "Laranja", "Maçã"))
 }
