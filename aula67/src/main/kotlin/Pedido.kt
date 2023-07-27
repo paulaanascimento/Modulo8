@@ -1,13 +1,14 @@
 class Pedido {
-    fun calcularTotal(listaFrutas:List<Fruta>): Double {
+    fun calcularTotal(listaFrutas: List<Fruta>): Double {
         var total = 0.0
         for (fruta in listaFrutas) {
             total += fruta.preco
         }
-        return total
+
+        return aplicarPromocao(listaFrutas, total)
     }
 
-    fun informarPedido(listaFrutas: List<String>):List<Fruta>{
+    fun informarPedido(listaFrutas: List<String>): List<Fruta> {
         val produtos = mutableListOf<Fruta>()
         for (nome in listaFrutas) {
             when (nome.trim().lowercase()) {
@@ -18,6 +19,20 @@ class Pedido {
         }
 
         return produtos
+    }
+
+    private fun aplicarPromocao(listaFrutas:List<Fruta>, total:Double):Double{
+        var novoValor = total
+
+        if(listaFrutas.count{it is Laranja} >= 3){
+            novoValor -= 0.25
+        }
+
+        if(listaFrutas.count{it is Maca} >= 2){
+            novoValor -= 0.60
+        }
+
+        return novoValor
     }
 }
 
