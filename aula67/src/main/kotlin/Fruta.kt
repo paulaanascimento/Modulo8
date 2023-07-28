@@ -1,4 +1,4 @@
-open class Fruta (val preco:Double)
+open class Fruta (var preco:Double)
 
 class Maca:Fruta(0.60)
 

@@ -21,19 +21,19 @@ class PedidoTest {
     }
 
     @Test
-    fun deveAplicarPromocaoLaranja() {
+    fun deveAplicarPromocaoLaranja() { //a cada três, uma sai de graça
         val pedido = Pedido()
-        pedido.informarPedido(listOf("Laranja", "Laranja", "Laranja"))
+        pedido.informarPedido(listOf("Laranja", "Laranja", "Laranja", "Laranja", "Laranja", "Laranja"))
         val resultado = pedido.calcularTotal()
-        assertEquals(0.50, resultado)
+        assertEquals(1.0, resultado)
     }
 
     @Test
-    fun deveAplicarPromocaoMaca() {
+    fun deveAplicarPromocaoMaca() { //a cada duas, uma sai de graça
         val pedido = Pedido()
-        pedido.informarPedido(listOf("Maçã", "Maçã"))
+        pedido.informarPedido(listOf("Maçã", "Maçã", "Maçã", "Maçã"))
         val resultado = pedido.calcularTotal()
-        assertEquals(0.60, resultado)
+        assertEquals(1.20, resultado)
     }
 
     @Test
@@ -58,10 +58,10 @@ class PedidoTest {
     fun deveLancarExcessaoDeFalhaNoPedido() {
         val pedido = Pedido()
         assertThrows(UnsupportedOperationException::class.java){
-            pedido.informarPedido(listOf("Laranja", "Laranja", "Laranja", "Laranja"))
+            pedido.informarPedido(listOf("Laranja", "Laranja", "Laranja", "Laranja", "Laranja", "Laranja", "Laranja"))
         }
         assertThrows(UnsupportedOperationException::class.java){
-            pedido.informarPedido(listOf("Maçã", "Maçã", "Maçã", "Maçã"))
+            pedido.informarPedido(listOf("Maçã", "Maçã", "Maçã", "Maçã", "Maçã"))
         }
         assertThrows(UnsupportedOperationException::class.java){
             pedido.informarPedido(listOf("Maçã", "Tomate"))

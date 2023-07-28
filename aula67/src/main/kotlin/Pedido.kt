@@ -2,23 +2,25 @@ class Pedido {
     private val status = listOf("Pendente", "Em separação", "Enviado")
     private var statusId = -1
 
-    private var estoqueLaranja = 3
-    private var estoqueMaca = 3
+    private var estoqueLaranja = 6
+    private var estoqueMaca = 4
 
     val listaFrutas = mutableListOf<Fruta>()
 
     fun calcularTotal(): Double {
+        aplicarPromocao()
+
         var total = 0.0
         for (fruta in listaFrutas) {
             total += fruta.preco
         }
 
-        return aplicarPromocao(total)
+        return total
     }
 
     fun informarPedido(lista: List<String>){
-        for (nome in lista) {
-            when (nome.trim().lowercase()) {
+        for (fruta in lista) {
+            when (fruta.lowercase()) {
                 "maçã" -> {
                     if (estoqueMaca == 0){
                         throw (UnsupportedOperationException("\nFalha no pedido!"))
@@ -40,18 +42,26 @@ class Pedido {
         }
     }
 
-    private fun aplicarPromocao(total:Double):Double{
-        var novoValor = total
+    private fun aplicarPromocao(){
 
-        if(listaFrutas.count{it is Laranja} >= 3){
-            novoValor -= 0.25
+        val laranjas = listaFrutas.filterIsInstance<Laranja>()
+        val macas = listaFrutas.filterIsInstance<Maca>()
+
+        if(laranjas.size >= 3){
+            for(i in 2 until  laranjas.size step 3){
+                laranjas[i].preco = 0.0
+            }
         }
 
-        if(listaFrutas.count{it is Maca} >= 2){
-            novoValor -= 0.60
+        if(macas.size >= 2){
+            for(i in 1 until  macas.size step 2){
+                macas[i].preco = 0.0
+            }
         }
 
-        return novoValor
+        listaFrutas.clear()
+        listaFrutas.addAll(laranjas)
+        listaFrutas.addAll(macas)
     }
 
     fun correio():String{
