@@ -58,10 +58,6 @@ class Pedido {
                 macas[i].preco = 0.0
             }
         }
-
-        listaFrutas.clear()
-        listaFrutas.addAll(laranjas)
-        listaFrutas.addAll(macas)
     }
 
     fun correio():String{
